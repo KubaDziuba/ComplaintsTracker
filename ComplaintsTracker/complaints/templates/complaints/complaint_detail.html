@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<a class="nav-link" href="{% url 'complaints:complaint_list' %}"><< Back</a>
+
+<h1>{{ object.cpl_name }}</h1>
+<p>{{ object.cpl_details }}</p>
+<p>Reporting User: {{ object.reporting_user }}</p>
+<p>Started: {{ object.cpl_creation_date }}</p>
+<p>Deadline: {{ object.cpl_deadline }}</p>
+<p>Final validator: {{ object.closing_user }}</p>
+
+{% endblock content %}
