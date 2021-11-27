@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if complaints %}
+
+	<h2>Latest complaints</h2>
+	<table class="table table-striped">
+		<thead class="thead-dark">
+		<tr>
+			<th>Name</th>
+			<th>Details</th>
+			<th>Deadline</th>
+			<th>Completion</th>
+		</tr>
+	</thead>
+		{%for complaint in complaints %}
+  <tr>
+	  <td>{{complaint.cpl_name}}</a></td>
+	  <td>{{complaint.cpl_details}}</td>
+	  <td>{{complaint.cpl_deadline}}</td>
+	  <td>{{complaint.is_cpl_finished}}</td>
+  </tr>
+
+		{%endfor %}
+</table>
+{% else %}
+<p>No complaints yet</p>
+{%endif %}
+{% endblock content %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Complaints</title>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid bg-dark">
+	<div class="container-xxl bg-dark p-4 text-white">
+		<h1>Complaint Tracker</h1>
+	</div>
+</div>
+<div class="container-fluid bg-dark">
+	<div class="container bg-dark">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<div class="container-fluid">
+			<ul class="navbar-nav">
+				<li class="nav-item" style="margin-right:10px">
+					<a class="nav-link" href="{% url 'complaints:index' %}">Home</a>
+				</li>
+				<li class="nav-item" style="margin-right:10px">
+					<a class="nav-link" href="#">Complaints</a>
+				</li>
+				{% if user.is_authenticated %}
+				<li class="nav-item dropdown" style="margin-right:10px">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">My Complaints</a>
+  						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">Created by Me</a></li>
+							<li><a class="dropdown-item" href="#">Opened</a></li>
+							<li><a class="dropdown-item" href="#">Finished</a></li>
+  						</ul>
+				</li>
+				<li class="nav-item dropdown" style="margin-right:10px">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">My Tasks</a>
+  						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">All Tasks</a></li>
+							<li><a class="dropdown-item" href="#">Opened</a></li>
+							<li><a class="dropdown-item" href="#">Finished</a></li>
+  						</ul>
+				</li>
+				{% endif %}
+			</ul>
+
+				<!-- ####### Login / Logout options ####### -->
+
+			<ul class="nav navbar-nav navbar-right">
+				{% if user.is_authenticated %}
+				<li class="nav-item">
+					<a class="nav-link disabled text-white" href="#">Hi {{ user.username }}!</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+				</li>
+				{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'login' %}">Log In</a>
+				</li>
+				{% endif %}
+			</ul>
+
+			</div>
+		</nav>
+	</div>
+</div>
+<div class="container-xxl pt-5">
+
+
+	<div class="col-lg-8">
+
+		{% block content %}{% endblock content %}
+
+	</div>
+
+</div>
+
+</body>
+</html>
