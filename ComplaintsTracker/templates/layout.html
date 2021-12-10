@@ -41,6 +41,9 @@
 							<li><a class="dropdown-item" href="#">All Tasks</a></li>
 							<li><a class="dropdown-item" href="#">Opened</a></li>
 							<li><a class="dropdown-item" href="#">Finished</a></li>
+							{% if is_manager %}
+							<li><a class="dropdown-item" href="#">Finished by Me</a></li>
+							{% endif %}
   						</ul>
 				</li>
 				{% endif %}
