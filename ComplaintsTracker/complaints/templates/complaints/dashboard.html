@@ -1,10 +1,50 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<p>test czy sie udalo</p>
 
+<div class="row">
+    <div class="col-sm-4  ">
+        <div class="mt-4 p-5 bg-secondary text-white rounded">
+            <h5>You have created</h5>
+            {% if count_of_my_cpl_list %}
+            <a href="{% url 'complaints:my_complaints' %}" type="button" class="btn btn-lg btn-dark"><h1>{{count_of_my_cpl_list}}</h1></a>
+            {% else %}
+            <a href="#" type="button" class="btn btn-lg btn-dark">0</a>
+            {% endif %}
+            <h5>complaints</h5>
+        </div>
+    </div>
+
+    <div class="col-sm-4  ">
+        <div class="mt-4 p-5 bg-secondary text-white rounded">
+            <h1>Jumbotron 2</h1>
+            <p>Lorem ipsum...</p>
+        </div>
+    </div>
+
+    <div class="col-sm-4  ">
+        <div class="mt-4 p-5 bg-secondary text-white rounded">
+            <h1>Jumbotron 3</h1>
+            <p>Lorem ipsum...</p>
+        </div>
+    </div>
+</div>
 {% if is_manager %}
-  <h1>Jestę kierownikię</h1>
+<div class="row">
+    <div class="col-sm-4  ">
+        <div class="mt-4 p-5 bg-secondary text-white rounded">
+            <h1>Jumbotron 4</h1>
+            <p>Lorem ipsum...</p>
+        </div>
+    </div>
+
+    <div class="col-sm-4  ">
+        <div class="mt-4 p-5 bg-secondary text-white rounded">
+            <h1>Jumbotron 5</h1>
+            <p>Lorem ipsum...</p>
+        </div>
+    </div>
+</div>
 {% endif %}
 
 {% endblock%}

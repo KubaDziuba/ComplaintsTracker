@@ -1,5 +1,4 @@
 from ..models import Complaint, Task
-from django.contrib.auth.models import User
 
 
 def latest_5_complaints():

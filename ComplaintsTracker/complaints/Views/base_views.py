@@ -15,7 +15,10 @@ def index(request):
 def dashboard(request):
     # getting list of groups user belongs to
     current_user_groups = request.user.groups.values_list("name", flat=True)
+    current_user = request.user.id
+    count_of_my_cpl_list = count_of_cpls_created_by_me(current_user)
     context = {
-            "is_manager": "Manager" in current_user_groups,
-    }
+        "is_manager": "Manager" in current_user_groups,
+        'count_of_my_cpl_list': count_of_my_cpl_list
+            }
     return render(request, 'complaints/dashboard.html', context)
