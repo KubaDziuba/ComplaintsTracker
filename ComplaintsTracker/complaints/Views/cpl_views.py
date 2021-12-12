@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from ..models import Complaint, Task
+from django.shortcuts import render,get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from ..Logic.cpl_logic import *
 
 
 class ComplaintListView(ListView):
@@ -9,5 +9,16 @@ class ComplaintListView(ListView):
     model = Complaint
 
 
-class ComplaintDetailView(DetailView):
-    model = Complaint
+def complaint_detail(request, complaint_id):
+    selected_cpl = get_object_or_404(Complaint, pk=complaint_id)
+    tasks_for_complaint = Task.objects.filter(complaint=complaint_id)
+    context = {'selected_cpl': selected_cpl, 'tasks_for_complaint': tasks_for_complaint}
+    return render(request, 'complaints/complaint_detail.html', context)
+
+
+def my_complaints(request):
+    current_user = request.user.id
+    my_cpl_list = cpls_created_by_me(current_user)
+    count_of_my_cpl_list = count_of_cpls_created_by_me(current_user)
+    context = {'my_cpl_list': my_cpl_list, 'count_of_my_cpl_list': count_of_my_cpl_list}
+    return render(request, 'complaints/my_complaints.html', context)

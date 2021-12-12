@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if my_cpl_list %}
+
+	<h2>You have created {{count_of_my_cpl_list}} complaints.</h2>
+	<table class="table table-striped">
+		<thead class="thead-dark">
+		<tr>
+			<th>Name</th>
+			<th>Details</th>
+			<th>Deadline</th>
+			<th>Created</th>
+			<th>Completion</th>
+		</tr>
+	</thead>
+		{%for complaint in my_cpl_list %}
+  <tr>
+	  <td><a href="{% url 'complaints:complaint_detail' complaint.id %}">{{complaint.cpl_name}}</a></td></td>
+	  <td>{{complaint.cpl_details}}</td>
+	  <td>{{complaint.cpl_deadline}}</td>
+	  <td>{{complaint.cpl_creation_date}}</td>
+	  <td>{{complaint.is_cpl_finished}}</td>
+  </tr>
+
+		{%endfor %}
+</table>
+{% else %}
+<p>No complaints yet</p>
+{%endif %}
+
+{% endblock content %}

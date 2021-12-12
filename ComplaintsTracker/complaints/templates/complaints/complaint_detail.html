@@ -4,11 +4,39 @@
 
 <a class="nav-link" href="{% url 'complaints:complaint_list' %}"><< Back</a>
 
-<h1>{{ object.cpl_name }}</h1>
-<p>{{ object.cpl_details }}</p>
-<p>Reporting User: {{ object.reporting_user }}</p>
-<p>Started: {{ object.cpl_creation_date }}</p>
-<p>Deadline: {{ object.cpl_deadline }}</p>
-<p>Final validator: {{ object.closing_user }}</p>
+<h1>{{ selected_cpl.cpl_name }}</h1>
+<p>{{ selected_cpl.cpl_details }}</p>
+<p>Reporting User: {{ selected_cpl.reporting_user }}</p>
+<p>Started: {{ selected_cpl.cpl_creation_date }}</p>
+<p>Deadline: {{ selected_cpl.cpl_deadline }}</p>
+<p>Final validator: {{ selected_cpl.closing_user }}</p>
+
+{% if tasks_for_complaint %}
+
+	<h2>Assigned Tasks</h2>
+	<table class="table table-striped">
+		<thead class="thead-dark">
+		<tr>
+			<th>Name</th>
+			<th>Details</th>
+			<th>Deadline</th>
+			<th>Assigned User</th>
+			<th>Completion</th>
+		</tr>
+	</thead>
+		{%for task in tasks_for_complaint %}
+  <tr>
+	  <td>{{ task.tsk_name }}</td>
+	  <td>{{task.tsk_details}}</td>
+	  <td>{{task.tsk_deadline}}</td>
+	  <td>{{task.assigned_user}}</td>
+	  <td>{{task.is_tsk_finished}}</td>
+  </tr>
+
+		{%endfor %}
+</table>
+{% else %}
+<p>No task assigned yet</p>
+{%endif %}
 
 {% endblock content %}
