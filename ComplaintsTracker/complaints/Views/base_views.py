@@ -1,17 +1,19 @@
 from django.shortcuts import render
 from ..models import Complaint, Task
-from ..Logic.generic import *
+from ..Logic.cpl_logic import *
 from django.contrib.auth.models import User
 
 
-# Create your views here.
+# Main view
 def index(request):
-    complaints = Complaint.objects.all()
+    complaints = latest_5_complaints()
     context = {'complaints': complaints}
     return render(request, 'complaints/index.html', context)
 
 
+# View of logged in user
 def dashboard(request):
+    # getting list of groups user belongs to
     current_user_groups = request.user.groups.values_list("name", flat=True)
     context = {
             "is_manager": "Manager" in current_user_groups,

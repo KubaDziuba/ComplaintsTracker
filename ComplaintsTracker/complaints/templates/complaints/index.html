@@ -10,6 +10,7 @@
 			<th>Name</th>
 			<th>Details</th>
 			<th>Deadline</th>
+			<th>Created</th>
 			<th>Completion</th>
 		</tr>
 	</thead>
@@ -18,6 +19,7 @@
 	  <td>{{complaint.cpl_name}}</a></td>
 	  <td>{{complaint.cpl_details}}</td>
 	  <td>{{complaint.cpl_deadline}}</td>
+	  <td>{{complaint.cpl_creation_date}}</td>
 	  <td>{{complaint.is_cpl_finished}}</td>
   </tr>
 
@@ -26,4 +28,5 @@
 {% else %}
 <p>No complaints yet</p>
 {%endif %}
+
 {% endblock content %}
