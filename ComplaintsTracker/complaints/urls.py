@@ -9,4 +9,5 @@ urlpatterns = [
     path('complaints/', cpl_views.ComplaintListView.as_view(), name='complaint_list'),
     path('complaints/<int:complaint_id>', cpl_views.complaint_detail, name='complaint_detail'),
     path('complaints/my_complaints', cpl_views.my_complaints, name='my_complaints'),
+    path('tasks/my_tasks', tsk_views.my_tasks, name='my_tasks'),
     ]

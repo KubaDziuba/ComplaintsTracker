@@ -3,11 +3,12 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-sm-4  ">
-        <div class="mt-4 p-5 bg-secondary text-white rounded">
+    <div class="col-sm-3  ">
+        <div class="mt-4 p-3 bg-secondary text-white rounded">
             <h5>You have created</h5>
             {% if count_of_my_cpl_list %}
-            <a href="{% url 'complaints:my_complaints' %}" type="button" class="btn btn-lg btn-dark"><h1>{{count_of_my_cpl_list}}</h1></a>
+            <a href="{% url 'complaints:my_complaints' %}" type="button" class="btn btn-lg btn-dark">
+                <h1>{{count_of_my_cpl_list}}</h1></a>
             {% else %}
             <a href="#" type="button" class="btn btn-lg btn-dark">0</a>
             {% endif %}
@@ -15,33 +16,71 @@
         </div>
     </div>
 
-    <div class="col-sm-4  ">
-        <div class="mt-4 p-5 bg-secondary text-white rounded">
-            <h1>Jumbotron 2</h1>
-            <p>Lorem ipsum...</p>
+    <div class="col-sm-3  ">
+        <div class="mt-4 p-3 bg-secondary text-white rounded">
+            <h5>You've been assigned to</h5>
+            {% if count_of_my_cpl_list %}
+            <a href="{% url 'complaints:my_tasks' %}" type="button" class="btn btn-lg btn-dark">
+                <h1>{{count_of_my_tsk_list}}</h1></a>
+            {% else %}
+            <a href="#" type="button" class="btn btn-lg btn-dark">0</a>
+            {% endif %}
+            <h5>tasks</h5>
         </div>
     </div>
 
-    <div class="col-sm-4  ">
-        <div class="mt-4 p-5 bg-secondary text-white rounded">
-            <h1>Jumbotron 3</h1>
-            <p>Lorem ipsum...</p>
+    <div class="col-sm-3  ">
+        <div class="mt-4 p-3 bg-danger text-white rounded">
+            <h5>You have</h5>
+            {% if count_of_my_cpl_list %}
+            <a href="{% url 'complaints:my_complaints' %}" type="button" class="btn btn-lg btn-dark">
+                <h1>{{count_of_my_cpl_list}}</h1></a>
+            {% else %}
+            <a href="#" type="button" class="btn btn-lg btn-dark">0</a>
+            {% endif %}
+            <h5>tasks to do</h5>
+        </div>
+    </div>
+
+    <div class="col-sm-3  ">
+        <div class="mt-4 p-3 bg-danger text-white rounded">
+            <h5>You have completed</h5>
+            {% if count_of_my_cpl_list %}
+            <a href="{% url 'complaints:my_complaints' %}" type="button" class="btn btn-lg btn-dark">
+                <h1>{{count_of_my_cpl_list}}</h1></a>
+            {% else %}
+            <a href="#" type="button" class="btn btn-lg btn-dark">0</a>
+            {% endif %}
+            <h5>tasks</h5>
         </div>
     </div>
 </div>
+
 {% if is_manager %}
 <div class="row">
-    <div class="col-sm-4  ">
-        <div class="mt-4 p-5 bg-secondary text-white rounded">
-            <h1>Jumbotron 4</h1>
-            <p>Lorem ipsum...</p>
+    <div class="col-sm-6  ">
+        <div class="mt-4 p-5 bg-danger text-white rounded">
+            <h5>You have approved</h5>
+            {% if count_of_my_cpl_list %}
+            <a href="{% url 'complaints:my_complaints' %}" type="button" class="btn btn-lg btn-dark">
+                <h1>{{count_of_my_cpl_list}}</h1></a>
+            {% else %}
+            <a href="#" type="button" class="btn btn-lg btn-dark">0</a>
+            {% endif %}
+            <h5>complaints</h5>
         </div>
     </div>
 
-    <div class="col-sm-4  ">
-        <div class="mt-4 p-5 bg-secondary text-white rounded">
-            <h1>Jumbotron 5</h1>
-            <p>Lorem ipsum...</p>
+    <div class="col-sm-6  ">
+        <div class="mt-4 p-5 bg-danger text-white rounded">
+            <h5>You have</h5>
+            {% if count_of_my_cpl_list %}
+            <a href="{% url 'complaints:my_complaints' %}" type="button" class="btn btn-lg btn-dark">
+                <h1>{{count_of_my_cpl_list}}</h1></a>
+            {% else %}
+            <a href="#" type="button" class="btn btn-lg btn-dark">0</a>
+            {% endif %}
+            <h5>complaints to approve</h5>
         </div>
     </div>
 </div>

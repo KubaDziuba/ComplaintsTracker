@@ -37,17 +37,19 @@
 							<li><a class="dropdown-item" href="{% url 'complaints:my_complaints' %}">Created by Me</a></li>
 							<li><a class="dropdown-item" href="#">Opened</a></li>
 							<li><a class="dropdown-item" href="#">Finished</a></li>
+							{% if is_manager %}
+							<li><a class="dropdown-item" href="#">Approved by Me</a></li>
+							<li><a class="dropdown-item" href="#">Awaiting my approval</a></li>
+							{% endif %}
   						</ul>
 				</li>
 				<li class="nav-item dropdown" style="margin-right:10px">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">My Tasks</a>
   						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">All Tasks</a></li>
+							<li><a class="dropdown-item" href="{% url 'complaints:my_tasks' %}">All Tasks</a></li>
 							<li><a class="dropdown-item" href="#">Opened</a></li>
 							<li><a class="dropdown-item" href="#">Finished</a></li>
-							{% if is_manager %}
-							<li><a class="dropdown-item" href="#">Finished by Me</a></li>
-							{% endif %}
+
   						</ul>
 				</li>
 				{% endif %}

@@ -14,3 +14,10 @@ def cpls_created_by_me(user):
 def count_of_cpls_created_by_me(user):
     cpl_count = Complaint.objects.filter(reporting_user=user).count()
     return cpl_count
+
+# TODO function to create complaint
+# TODO function to approve complaint by manager
+
+# TODO filter function for complaints created by user which aren't yet approved
+# TODO filter function for complaints already approved by given manager
+# TODO filter function for complaints yet to be closed by given manager
