@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if my_closed_cpls %}
+<h2>Opened complaints</h2>
+	<table class="table table-striped">
+		<thead class="thead-dark">
+		<tr>
+			<th>Name</th>
+			<th>Details</th>
+			<th>Deadline</th>
+			<th>Created</th>
+		</tr>
+	</thead>
+		{%for complaint in my_closed_cpls %}
+  <tr>
+	  <td><a href="{% url 'complaints:complaint_detail' complaint.id %}">{{complaint.cpl_name}}</a></td></td>
+	  <td>{{complaint.cpl_details}}</td>
+	  <td>{{complaint.cpl_deadline}}</td>
+	  <td>{{complaint.cpl_creation_date}}</td>
+  </tr>
+
+		{%endfor %}
+</table>
+{% else %}
+<p>You have no closed complaints</p>
+{%endif %}
+
+{% endblock content %}

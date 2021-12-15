@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<a class="nav-link" href="{% url 'complaints:dashboard' %}"><< Back</a>
+
+{% if closed_tasks %}
+
+	<h2>Assigned closed tasks</h2>
+	<table class="table table-striped">
+		<thead class="thead-dark">
+		<tr>
+			<th>Name</th>
+			<th>Details</th>
+			<th>Deadline</th>
+			<th>Assigned User</th>
+			<th>Complaint</th>
+		</tr>
+	</thead>
+		{%for task in closed_tasks%}
+  <tr>
+	  <td>{{task.tsk_name}}</td>
+	  <td>{{task.tsk_details}}</td>
+	  <td>{{task.tsk_deadline}}</td>
+	  <td>{{task.assigned_user}}</td>
+	  <td><a class="nav-link" href="{% url 'complaints:complaint_detail' task.complaint.id %}">{{task.complaint}}</a></td>
+  </tr>
+
+		{%endfor %}
+</table>
+{% else %}
+<p>No task assigned yet</p>
+{%endif %}
+
+{% endblock content %}
