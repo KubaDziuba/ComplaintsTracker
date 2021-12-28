@@ -1,6 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
 from ..Logic.tsk_logic import *
 
 
@@ -41,6 +39,17 @@ def my_closed_tasks(request):
     return render(request, 'complaints/my_closed_tasks.html', context)
 
 
-# TODO task detail view
+def task_detail(request, task_id):
+    """Detail page for selected task"""
+    # getting list of groups user belongs to for later determination if user belongs to admin
+    current_user_groups = request.user.groups.values_list("name", flat=True)
+    selected_tsk = get_object_or_404(Task, pk=task_id)
+    parent_cpl = selected_tsk.complaint
+    context = {'selected_tsk': selected_tsk,
+               'parent_cpl': parent_cpl,
+               "is_manager": "Manager" in current_user_groups}
+    return render(request, 'complaints/task_detail.html', context)
+
+
 # TODO create task view
 # TODO close task view

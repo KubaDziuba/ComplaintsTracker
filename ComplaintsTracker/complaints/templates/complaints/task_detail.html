@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<h1>{{ selected_tsk.tsk_name }}</h1>
+<p>{{ selected_tsk.tsk_details }}</p>
+<p>Responsible: {{ selected_tsk.assigned_user }}</p>
+<p>Started: {{ selected_tsk.tsk_creation_date }}</p>
+<p>Deadline: {{ selected_tsk.tsk_deadline }}</p>
+
+
+{% endblock content %}

@@ -19,7 +19,7 @@
 	</thead>
 		{%for task in closed_tasks%}
   <tr>
-	  <td>{{task.tsk_name}}</td>
+	  <td><a href="{% url 'complaints:task_detail' task.id %}">{{task.tsk_name}}</a></td>
 	  <td>{{task.tsk_details}}</td>
 	  <td>{{task.tsk_deadline}}</td>
 	  <td>{{task.assigned_user}}</td>
@@ -29,7 +29,7 @@
 		{%endfor %}
 </table>
 {% else %}
-<p>No task assigned yet</p>
+<p>You do not have any closed tasks yet.</p>
 {%endif %}
 
 {% endblock content %}

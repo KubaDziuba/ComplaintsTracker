@@ -1,7 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404
+from django.urls import reverse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from ..Logic.cpl_logic import *
+from ..forms import ComplaintForm
+from django.views import View
 
 
 class ComplaintListView(ListView):
@@ -16,6 +20,27 @@ class ComplaintListView(ListView):
         current_user_groups = self.request.user.groups.values_list("name", flat=True)
         context['is_manager'] = "Manager" in current_user_groups
         return context
+
+
+class NewComplaint(View):
+    """Complaint creation form"""
+    def get(self, request):
+        form = ComplaintForm()
+        context = {'form': form}
+        return render(request, 'complaints/new_complaint.html', context)
+
+    def post(self, request):
+        form = ComplaintForm(request.POST)
+        current_user = request.user
+        if form.is_valid():
+            complaint = Complaint.objects.create(
+                cpl_name=form.cleaned_data.get('cpl_name'),
+                cpl_details=form.cleaned_data.get('cpl_details'),
+                cpl_deadline=form.cleaned_data.get('cpl_deadline'),
+                closing_user=form.cleaned_data.get('closing_user'),
+                reporting_user=current_user
+            )
+            return HttpResponseRedirect(reverse('complaints:dashboard'))
 
 
 def complaint_detail(request, complaint_id):
@@ -101,5 +126,9 @@ def my_approved_complaints(request):
                }
     return render(request, 'complaints/my_approved_complaints.html', context)
 
-# TODO create complaint view
-# TODO closing complaint view
+# TODO create complaint view - created validation needed:
+#  - for closing user only managers visible,
+#  - creator can't be final approver
+
+# TODO closing complaint view with validation
+# TODO add button for adding task to given complaint
