@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from ..Logic.cpl_logic import *
 from ..forms import ComplaintForm
 from django.views import View
+from django.contrib.auth.models import User
 
 
 class ComplaintListView(ListView):
@@ -26,7 +27,8 @@ class NewComplaint(View):
     """Complaint creation form"""
     def get(self, request):
         form = ComplaintForm()
-        context = {'form': form}
+        closing_user = User.objects.filter(groups__name='Manager').values_list("first_name", flat=True)
+        context = {'form': form, 'closing_user': closing_user}
         return render(request, 'complaints/new_complaint.html', context)
 
     def post(self, request):
