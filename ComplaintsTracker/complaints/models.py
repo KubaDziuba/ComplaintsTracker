@@ -17,6 +17,9 @@ class Complaint(models.Model):
     def __str__(self):
         return self.cpl_name
 
+    def is_approver_different_than_reporting_user(self):
+        return self.reporting_user != self.closing_user
+
 
 class Task(models.Model):
     complaint = models.ForeignKey(Complaint, blank=True, null=True, on_delete=models.CASCADE)

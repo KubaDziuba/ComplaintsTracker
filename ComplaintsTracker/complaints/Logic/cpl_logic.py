@@ -67,6 +67,8 @@ def approved_cpls_count(user):
     managers_approved_cpls_count = Complaint.objects.filter(closing_user=user, is_cpl_finished=True).count()
     return managers_approved_cpls_count
 
+
+
 # TODO function to create complaint
 # TODO function to approve complaint by manager
 

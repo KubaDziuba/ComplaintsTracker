@@ -35,6 +35,7 @@ class NewComplaint(View):
         form = ComplaintForm(request.POST)
         current_user = request.user
         if form.is_valid():
+            # TODO add validation for closing user and approver
             complaint = Complaint.objects.create(
                 cpl_name=form.cleaned_data.get('cpl_name'),
                 cpl_details=form.cleaned_data.get('cpl_details'),
