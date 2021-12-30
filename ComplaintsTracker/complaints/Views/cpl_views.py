@@ -28,22 +28,29 @@ class NewComplaint(View):
     def get(self, request):
         form = ComplaintForm()
         closing_user = User.objects.filter(groups__name='Manager').values_list("first_name", flat=True)
-        context = {'form': form, 'closing_user': closing_user}
+        info_alert = False
+        context = {'form': form, 'closing_user': closing_user, 'info_alert': info_alert}
         return render(request, 'complaints/new_complaint.html', context)
 
     def post(self, request):
         form = ComplaintForm(request.POST)
         current_user = request.user
+        closing_user = User.objects.filter(groups__name='Manager')
+        error_approver = 'Approver must be different than reporting user'
         if form.is_valid():
-            # TODO add validation for closing user and approver
-            complaint = Complaint.objects.create(
-                cpl_name=form.cleaned_data.get('cpl_name'),
-                cpl_details=form.cleaned_data.get('cpl_details'),
-                cpl_deadline=form.cleaned_data.get('cpl_deadline'),
-                closing_user=form.cleaned_data.get('closing_user'),
-                reporting_user=current_user
-            )
-            return HttpResponseRedirect(reverse('complaints:dashboard'))
+            new_complaint = Complaint()
+            new_complaint.cpl_name = form.cleaned_data.get('cpl_name')
+            new_complaint.cpl_details = form.cleaned_data.get('cpl_details')
+            new_complaint.cpl_deadline = form.cleaned_data.get('cpl_deadline')
+            new_complaint.closing_user = form.cleaned_data.get('closing_user')
+            new_complaint.reporting_user = current_user
+            if new_complaint.is_approver_different_than_reporting_user():
+                new_complaint.save()
+                return HttpResponseRedirect(reverse('complaints:dashboard'))
+            else:
+                info_alert = True
+        context = {'form': form, 'closing_user': closing_user, 'error_approver': error_approver, 'info_alert': info_alert}
+        return render(request, 'complaints/new_complaint.html', context)
 
 
 def complaint_detail(request, complaint_id):
@@ -129,9 +136,6 @@ def my_approved_complaints(request):
                }
     return render(request, 'complaints/my_approved_complaints.html', context)
 
-# TODO create complaint view - created validation needed:
-#  - for closing user only managers visible,
-#  - creator can't be final approver
 
 # TODO closing complaint view with validation
 # TODO add button for adding task to given complaint

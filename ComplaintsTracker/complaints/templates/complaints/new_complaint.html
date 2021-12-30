@@ -1,7 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+{% if info_alert %}
+<div class="alert alert-danger">{{error_approver}}</div>
+{% endif%}
 <form method="post">
      {% csrf_token %}
      {{ form.as_p }}
