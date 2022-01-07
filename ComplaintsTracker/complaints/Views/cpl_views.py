@@ -2,7 +2,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404
 from django.urls import reverse
 from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
 from ..Logic.cpl_logic import *
 from ..forms import ComplaintForm
 from django.views import View
@@ -37,6 +36,7 @@ class NewComplaint(View):
         current_user = request.user
         closing_user = User.objects.filter(groups__name='Manager')
         error_approver = 'Approver must be different than reporting user'
+        info_alert = False
         if form.is_valid():
             new_complaint = Complaint()
             new_complaint.cpl_name = form.cleaned_data.get('cpl_name')
@@ -46,10 +46,11 @@ class NewComplaint(View):
             new_complaint.reporting_user = current_user
             if new_complaint.is_approver_different_than_reporting_user():
                 new_complaint.save()
-                return HttpResponseRedirect(reverse('complaints:dashboard'))
+                return HttpResponseRedirect(reverse('complaints:complaint_detail', args=(new_complaint.pk,)))
             else:
                 info_alert = True
-        context = {'form': form, 'closing_user': closing_user, 'error_approver': error_approver, 'info_alert': info_alert}
+        context = {'form': form, 'closing_user': closing_user, 'error_approver': error_approver,
+                   'info_alert': info_alert}
         return render(request, 'complaints/new_complaint.html', context)
 
 
@@ -137,5 +138,5 @@ def my_approved_complaints(request):
     return render(request, 'complaints/my_approved_complaints.html', context)
 
 
-# TODO closing complaint view with validation
-# TODO add button for adding task to given complaint
+# TODO closing complaint view with validation - all tasks closed
+

@@ -39,4 +39,6 @@
 <p>No task assigned yet</p>
 {%endif %}
 
+<div><a href="{% url 'complaints:new_task' selected_cpl.id  %}" type="button" class="btn btn-lg btn-primary">Add Task</a></div>
+
 {% endblock content %}

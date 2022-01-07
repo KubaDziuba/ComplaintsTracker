@@ -15,6 +15,7 @@ urlpatterns = [
     path('complaints/my_complaints_to_approve', cpl_views.my_complaints_to_approve,
          name='my_complaints_to_approve'),
     path('complaints/my_approved_complaints', cpl_views.my_approved_complaints, name='my_approved_complaints'),
+    path('complaints/<int:complaint_id>/new_task/', tsk_views.NewTask.as_view(), name='new_task'),
     path('tasks/my_tasks', tsk_views.my_tasks, name='my_tasks'),
     path('tasks/my_open_tasks', tsk_views.my_open_tasks, name='my_open_tasks'),
     path('tasks/my_closed_tasks', tsk_views.my_closed_tasks, name='my_closed_tasks'),
